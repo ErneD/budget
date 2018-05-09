@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>{% block title %}Depenses{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<style>
+#A {
+    background-color: DodgerBlue;
+    border: 1px solid black;
+    height: 50px;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+}
+positive {
+    text-decoration: none;
+    color: green;
+	font-weight: bold;
+}
+negative {
+    text-decoration: none;
+    color: red;
+	font-weight: bold;
+}
+</style>
+</head>
+<body>
+
+    <div data-role="page" data-theme="a">
+
+        <!-- Header, éventuellement -->
+        <div data-role="header">
+            <h1>{% block header %}HEADER{% endblock %}</h1>
+            <a href="{% url 'home_dynamic' %}" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="{% url 'transaction_add' %}" class="ui-icon-plus ui-btn-icon-right">Ajouter dépénse</a></li>
+                    <li><a href="{% url 'etablissement_add' %}" class="ui-btn ui-icon-plus ui-btn-icon-right">Ajouter établissement</a></li>
+                </ul>
+            {%block buttons%}
+            {%endblock%}
+            </div>
+        </div> 
+
+       
+        {% block body %}
+        {% endblock %}
+
+ 
+    </div>
+</body>
+</html>

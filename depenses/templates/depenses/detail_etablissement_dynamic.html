@@ -1,0 +1,54 @@
+{% extends 'depenses/base_mobile.html' %}
+
+{% block title %}Detail etablissement{% endblock %}
+{% block header %}{{etablissement_title.etablissement_nom}}{% endblock %}
+
+{% block body %}
+
+	<div class="ui-corner-all custom-corners">
+		<div class="ui-bar ui-bar-a">
+
+			{% if report == "1" %}
+				<h3>Jour : {{ periode_encours|date:"l j M Y" }}</h3>
+			{% elif  report == "2" %}
+				<h3>{{ periode_encours }}</h3>
+			{% elif report == "3" %}
+				<h3>Mois : {{ periode_encours|date:"F Y" }}</h3>
+			{% elif report == "4" %}
+				<h3>Année : {{ periode_encours|date:"Y" }}</h3>
+			{% endif %}
+
+		</div>
+<br>
+	
+{% for transaction in transactions_etablissement%}
+		{{transaction.transaction_date|date:"l d M"}} : {{transaction.transaction_montant}} €<br>
+	{% empty %}
+	Pas d'achats cette semaine
+{% endfor %}
+<br>
+{% endblock %}
+
+{% block buttons %}
+
+	{% for categorie in categorie_choisie %}
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="{% url 'etablissement_details' categorie.id %}?choice=1" data-role="button" data-ajax="false">Jour</a></li>
+                    <li><a href="{% url 'etablissement_details' categorie.id %}?choice=2" data-role="button" data-ajax="false">Semaine</a></li>
+                    <li><a href="{% url 'etablissement_details' categorie.id %}?choice=3" data-role="button" data-ajax="false">Mois</a></li>
+                    <li><a href="{% url 'etablissement_details' categorie.id %}?choice=4" data-role="button" data-ajax="false">Année</a></li>
+                </ul>
+            </div>
+    {% empty %}
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="{{ request.path_info }}?choice=1" data-role="button" data-ajax="false">Jour</a></li>
+                    <li><a href="{{ request.path_info }}?choice=2" data-role="button" data-ajax="false">Semaine</a></li>
+                    <li><a href="{{ request.path_info }}?choice=3" data-role="button" data-ajax="false">Mois</a></li>                    
+                    <li><a href="{{ request.path_info }}?choice=4" data-role="button" data-ajax="false">Année</a></li>
+                </ul>
+            </div>
+	{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'depenses/base_mobile_form.html' %}
+
+{% block title %}Nouvel établissement{% endblock %}
+{% block header %}Etablissement crée{% endblock %}
+
+{% block body %}
+			<br>
+			<strong>Catégorie : </strong>{{ etablissement_cree.categorie }}<br>
+			<strong>Etablissement : </strong>{{ etablissement_cree.etablissement_nom }}<br>
+	
+		<div class="navbar">
+		
+			<a href="{% url 'home_dynamic' %}" class="ui-btn ui-btn-inline" data-role="button" data-ajax="false">OK</a>
+			<a href="{% url 'transaction_add' %}" class="ui-btn ui-btn-inline" data-role="button">Ajouter dépense</a>
+
+		</div>
+
+{% endblock %}
+
+
