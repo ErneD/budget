@@ -17,8 +17,11 @@ from .models import Transaction
 from .models import Parametre
 from django.db.models import When, F, Q
 
-# Create your views here.
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
+# Create your views here.
+@login_required
 def home_dynamic(request):
 
 	report = '2'
@@ -56,7 +59,7 @@ def home_dynamic(request):
 
 	return render(request, 'depenses/home_dynamic.html', context)
 
-
+@login_required
 def etablissements(request,categorie_id):
 
 	report = '2'
@@ -97,6 +100,7 @@ def etablissements(request,categorie_id):
 	}
 	return render(request, 'depenses/etablissements_dynamic.html', context)
 
+@login_required
 def etablissement_details(request,etablissement_id):
 
 	report = '2'
@@ -133,14 +137,15 @@ def etablissement_details(request,etablissement_id):
 	}
 	return render(request, 'depenses/detail_etablissement_dynamic.html', context)
 
-class TransactionCreate(CreateView):
+class TransactionCreate(LoginRequiredMixin,CreateView):
 	model = Transaction
 	fields = ['etablissement','transaction_date','transaction_montant']
 
-class EtablissementCreate(CreateView):
+class EtablissementCreate(LoginRequiredMixin,CreateView):
 	model = Etablissement
 	fields = ['categorie','etablissement_nom']
 
+@login_required	
 def nouvel_etablissement(request,etablissement_id):
 	etablissement_cree = Etablissement.objects.get(id=etablissement_id)
 	
@@ -149,6 +154,7 @@ def nouvel_etablissement(request,etablissement_id):
 	}
 	return render(request, 'depenses/etablissement_nouveau.html',context)
 
+@login_required
 def nouvelle_transaction(request,transaction_id):
 	transaction_cree = Transaction.objects.get(id=transaction_id)
 		
