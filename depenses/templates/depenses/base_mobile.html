@@ -31,26 +31,33 @@
    <body>
       <div data-role="page" data-theme="a">
          <!-- Header, éventuellement -->
+		 {% if user.is_authenticated %}
          <div data-role="header">
             <h1>{% block header %}HEADER{% endblock %}</h1>
+			<a href="{% url 'logout'%}" class="ui-txt-left">Logout</a>
             <a href="{% url 'home_dynamic' %}" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
             <div data-role="navbar">
                <ul>
-                  <li><a href="{% url 'transaction_add' %}" class="ui-icon-plus ui-btn-icon-right">Ajouter dépénse</a></li>
+                  <li><a href="{% url 'transaction_add' %}" class="ui-icon-plus ui-btn-icon-right">Ajouter dépense</a></li>
                   <li><a href="{% url 'etablissement_add' %}" class="ui-btn ui-icon-plus ui-btn-icon-right">Ajouter établissement</a></li>
                </ul>
                {%block buttons%}
                {%endblock%}
             </div>
          </div>
+		 {% endif %}
          {% block body %}
          {% endblock %}
-         <div align="right">
+         <div align="left">
             {% if user.is_authenticated %}
+			<ul style="list-style-type:none">
             <li>Utilisateur: {{ user.get_username }}</li>
+			<!--
             <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
-            {% else %}
+
             <li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>
+			-->
+			</ul>
             {% endif %} 
          </div>
       </div>
