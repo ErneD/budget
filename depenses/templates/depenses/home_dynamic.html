@@ -39,11 +39,11 @@
       <strong>{{categorie.categorie_nom}} :
       {% if categorie.etat_budget < 0 %}
       </strong>
-      <negative>{{ categorie.etat_budget}}€</negative>
+      <negative>{{ categorie.etat_budget}} €</negative>
       <br>
       {% else %}
       </strong>
-      <positive>{{ categorie.etat_budget}}€</positive>
+      <positive>{{ categorie.etat_budget}} €</positive>
       <br>
       {% endif %}		
       {% endfor %}
@@ -53,14 +53,14 @@
          {{ parametre.parametre_type}} :
          {% if report == "1" %}
          <positive>
-         {{ parametre.parametre_montant_hebdo}}
+         {{ parametre.parametre_montant_hebdo}} €
          {% elif report == "2" %}
          <positive>
-         {{ parametre.parametre_montant_hebdo}}
+         {{ parametre.parametre_montant_hebdo}} €
          {% elif report == "3" %} 
-         <positive>{{ parametre.mois}}</positive>
+         <positive>{{ parametre.mois}} €</positive>
          {% elif report == "4" %}
-         <positive>{{ parametre.annee}}</positive>
+         <positive>{{ parametre.annee}} €</positive>
          {% endif %}
       </strong>
       <br>
